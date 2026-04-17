@@ -126,6 +126,38 @@ max-width:720px;margin-bottom:56px}
   .hero-logo-brand{max-width:260px!important;max-height:90px!important}
 }
 
+/* ══ DIMENSIONAL DOT TEXTURE ═════════════════════
+   3 staplade radial-gradienter per tile (28px) =
+   highlight upp-vänster + basprick + skugga ner-höger.
+   Skapar subtil konvex (upphöjd) textur på mörka sektioner
+   och konkav (pressad) dimple på cream-sektionen (sec-mq).
+   Applied till alla sektioner utom hero.
+════════════════════════════════════════════════ */
+#sec-mq::before, #sec-spar::before, #sec-profil::before, #sec-pr::before, #sec-cta::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-size:28px 28px
+}
+#sec-spar::before, #sec-profil::before, #sec-pr::before, #sec-cta::before{
+  background-image:
+    radial-gradient(circle 1.6px at 42% 38%,
+      rgba(255,232,180,.38) 0%,
+      rgba(212,168,75,.14) 42%,
+      rgba(0,0,0,.45) 92%,
+      transparent 100%)
+}
+#sec-mq::before{
+  background-image:
+    radial-gradient(circle 1.5px at 42% 38%,
+      rgba(255,255,255,.55) 0%,
+      rgba(24,19,15,.1) 45%,
+      rgba(0,0,0,.28) 95%,
+      transparent 100%)
+}
+/* säkra att mq-grid (partner logos) ligger ovanför dot-texturen — alla andra
+   sektioner har redan inner-wrappers (.sp-inner/.sec-inner/.pr-inner/.cta-inner)
+   med position:relative;z-index:1, så de är redan korrekt staplade */
+#sec-mq > .mq-grid{position:relative;z-index:1}
+
 /* ══ PARTNERS TICKER ════════════════════════════ */
 #sec-mq{
   background:#f4f0eb;
@@ -344,8 +376,6 @@ box-shadow:0 8px 48px rgba(212,168,75,.1)}
 #sec-cta{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;
 text-align:center;overflow:hidden;
 background:radial-gradient(ellipse 90% 80% at 50% 50%,var(--bg3) 0%,var(--bg) 70%)}
-.cta-dots{position:absolute;inset:0;pointer-events:none;
-background-image:radial-gradient(circle,rgba(212,168,75,.05) 1px,transparent 1px);background-size:28px 28px}
 .cta-orb{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none}
 .cta-orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,122,62,.3),transparent);bottom:-180px;right:-100px;animation:orbf 22s ease-in-out infinite;animation-delay:-5s}
 .cta-orb-2{width:450px;height:450px;background:radial-gradient(circle,rgba(212,168,75,.12),transparent);top:-120px;left:-80px;animation:orbf 18s ease-in-out infinite;animation-delay:-11s}
@@ -609,7 +639,6 @@ position:relative;overflow:hidden;transition:color .35s}
 
 <!-- ══ CTA ══════════════════════════════════════════ -->
 <section id="sec-cta">
-  <div class="cta-dots" aria-hidden="true"></div>
   <div class="cta-orb cta-orb-1" aria-hidden="true"></div>
   <div class="cta-orb cta-orb-2" aria-hidden="true"></div>
   <div class="cta-inner">

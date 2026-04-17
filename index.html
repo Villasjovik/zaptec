@@ -500,12 +500,13 @@ position:relative;overflow:hidden;transition:color .35s}
   border:1px solid rgba(212,168,75,.22);border-top:1.5px solid rgba(212,168,75,.45);
   border-radius:22px;
   overflow:hidden; /* klipper allt innehåll till rundade hörn */
-  background:linear-gradient(150deg,rgba(22,48,32,.62) 0%,rgba(14,32,22,.58) 55%,rgba(28,22,12,.52) 100%);
-  backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
+  isolation:isolate;
+  background:
+    linear-gradient(150deg,rgba(22,48,32,.92) 0%,rgba(14,32,22,.94) 55%,rgba(18,26,18,.95) 100%),
+    var(--bg);
   box-shadow:
-    0 28px 72px rgba(0,0,0,.55),
-    0 10px 24px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.07),
+    0 22px 48px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.06),
     inset 0 -1px 0 rgba(212,168,75,.08);
   text-align:left
 }
@@ -887,7 +888,7 @@ position:relative;overflow:hidden;transition:color .35s}
       <div class="bk-panel" id="bk-panel" role="region" aria-label="Bokningsflow" aria-hidden="true">
         <div class="bk-card">
           <div class="bk-head">
-            <h3 class="bk-title">Boka ett <em>första möte</em></h3>
+            <h3 class="bk-title">Boka ett <em>digitalt möte</em></h3>
             <button class="bk-close ch" type="button" id="bk-close" aria-label="Stäng">×</button>
           </div>
 
@@ -902,7 +903,7 @@ position:relative;overflow:hidden;transition:color .35s}
           <!-- STAGE 1: DATUM -->
           <div class="bk-stage active" data-stage="1">
             <h3>Välj datum</h3>
-            <p class="bk-sub">Vardagar, 30–45 min. Digitalt eller på plats i Villa Sjövik.</p>
+            <p class="bk-sub">Digitalt möte via Google Meet — 30 min. Länk skickas med bekräftelsen.</p>
             <div class="bk-cal-head">
               <span class="bk-cal-month" id="bk-cal-month"></span>
               <div class="bk-cal-nav">
@@ -950,20 +951,12 @@ position:relative;overflow:hidden;transition:color .35s}
                 <input type="text" id="bk-name" name="name" placeholder="För- och efternamn" required autocomplete="name">
               </div>
               <div class="bk-field">
-                <label for="bk-company">Företag</label>
-                <input type="text" id="bk-company" name="company" placeholder="Zaptec / varumärke" required autocomplete="organization">
-              </div>
-              <div class="bk-field">
                 <label for="bk-email">E-post</label>
-                <input type="email" id="bk-email" name="email" placeholder="namn@företag.se" required autocomplete="email">
-              </div>
-              <div class="bk-field">
-                <label for="bk-phone">Telefon <span style="opacity:.5;text-transform:none;letter-spacing:0">(valfritt)</span></label>
-                <input type="tel" id="bk-phone" name="phone" placeholder="+46 70 123 45 67" autocomplete="tel">
+                <input type="email" id="bk-email" name="email" placeholder="namn@zaptec.se" required autocomplete="email">
               </div>
               <div class="bk-field bk-full">
-                <label for="bk-msg">Meddelande <span style="opacity:.5;text-transform:none;letter-spacing:0">(valfritt)</span></label>
-                <textarea id="bk-msg" name="message" placeholder="Kort om vad ni vill diskutera — produkt, tidsplan, mål…"></textarea>
+                <label for="bk-msg">Något du vill dela innan mötet? <span style="opacity:.5;text-transform:none;letter-spacing:0">(valfritt)</span></label>
+                <textarea id="bk-msg" name="message" placeholder="Några tankar, frågor eller önskemål — annars tar vi det på mötet."></textarea>
               </div>
             </form>
             <div class="bk-nav">
@@ -1412,7 +1405,7 @@ if(spotSec){
   /* ── Skicka bokning ── */
   function validate(){
     let ok=true;
-    ['bk-name','bk-company','bk-email'].forEach(id=>{
+    ['bk-name','bk-email'].forEach(id=>{
       const el=document.getElementById(id);
       const v=(el.value||'').trim();
       const wrap=el.closest('.bk-field');
@@ -1432,7 +1425,7 @@ if(spotSec){
   submitBtn.addEventListener('click',async ()=>{
     errEl.style.display='none';
     if(!validate()){
-      errEl.textContent='Fyll i namn, företag och en giltig e-postadress.';
+      errEl.textContent='Fyll i namn och en giltig e-postadress.';
       errEl.style.display='block';
       return;
     }
@@ -1442,16 +1435,14 @@ if(spotSec){
     const d=state.selDate;
     const dateStr=`${SV_DAYS_LONG[d.getDay()]} ${d.getDate()} ${SV_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
     const payload={
-      _subject:`Ny mötesbokning — ${document.getElementById('bk-name').value.trim()} / ${document.getElementById('bk-company').value.trim()}`,
+      _subject:`Ny mötesbokning — ${document.getElementById('bk-name').value.trim()} (Zaptec)`,
       _template:'table',
       _captcha:'false',
-      Bokningstyp:'Möte via Zaptec-pitch',
+      Bokningstyp:'Digitalt möte via Zaptec-pitch',
       Datum:dateStr,
       Tid:state.selTime,
       Namn:document.getElementById('bk-name').value.trim(),
-      Företag:document.getElementById('bk-company').value.trim(),
       Email:document.getElementById('bk-email').value.trim(),
-      Telefon:document.getElementById('bk-phone').value.trim()||'—',
       Meddelande:document.getElementById('bk-msg').value.trim()||'—',
       Källa:'Zaptec-pitch (villasjovik.github.io/zaptec)'
     };
@@ -1475,15 +1466,13 @@ if(spotSec){
     }else{
       // Fallback: öppna mailto så användaren manuellt skickar (kräver ingen aktivering)
       const body=
-`Ny mötesbokning
+`Ny mötesbokning (digitalt möte)
 
 Datum: ${dateStr}
 Tid: ${state.selTime}
 
 Namn: ${payload.Namn}
-Företag: ${payload.Företag}
 E-post: ${payload.Email}
-Telefon: ${payload.Telefon}
 
 Meddelande:
 ${payload.Meddelande}

@@ -245,7 +245,7 @@ display:flex;align-items:center;gap:16px;margin-bottom:52px}
 .sec-h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,54px);font-weight:400;line-height:1.12;margin-bottom:48px}
 .sec-h2 em{font-style:italic;color:var(--gold)}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(212,168,75,.14);border-radius:16px;overflow:hidden}
-.sc{padding:44px 24px;text-align:center;border-right:1px solid rgba(212,168,75,.1);position:relative;overflow:hidden;transition:background .3s}
+.sc{padding:44px 24px;text-align:center;border-right:1px solid rgba(212,168,75,.1);position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:200px}
 .sc:last-child{border-right:none}
 .sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
 background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .8s var(--ease)}
@@ -540,12 +540,12 @@ position:relative;overflow:hidden;transition:color .35s}
       </div>
       <div class="sc rv d2">
         <div class="sc-bg sc-bg-sym" aria-hidden="true">&amp;</div>
-        <span class="sc-num" style="font-size:clamp(16px,2.2vw,26px);padding-top:8px">Hem &amp; trädgård</span>
+        <span class="sc-num" style="font-size:clamp(16px,2.2vw,26px)">Hem &amp; trädgård</span>
         <p class="sc-lbl">Nisch &amp; målgrupp</p>
       </div>
       <div class="sc rv d3">
         <div class="sc-bg sc-bg-sym" aria-hidden="true">@</div>
-        <span class="sc-num" style="font-size:clamp(14px,1.8vw,22px);padding-top:8px">Visuell kreatör</span>
+        <span class="sc-num" style="font-size:clamp(14px,1.8vw,22px)">Visuell kreatör</span>
         <p class="sc-sub" style="font-size:11px;margin-top:6px">Villa Sjövik &mdash; @villasjovik</p>
         <p class="sc-lbl" style="visibility:hidden">&mdash;</p>
       </div>

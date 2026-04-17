@@ -490,10 +490,15 @@ position:relative;overflow:hidden;transition:color .35s}
 .bk-wrap{width:100%;max-width:640px;margin:32px auto 0;position:relative;z-index:2}
 .bk-panel{
   overflow:hidden;max-height:0;opacity:0;
-  transition:max-height .9s var(--ease),opacity .6s var(--ease),margin-top .6s var(--ease);
+  border-radius:22px;
+  transition:max-height .9s var(--ease),opacity .6s var(--ease),margin-top .6s var(--ease),box-shadow .6s var(--ease);
   margin-top:0;pointer-events:none;
+  box-shadow:0 0 0 rgba(0,0,0,0);
 }
-.bk-panel.open{max-height:1200px;opacity:1;margin-top:24px;pointer-events:auto}
+.bk-panel.open{
+  max-height:1200px;opacity:1;margin-top:24px;pointer-events:auto;
+  box-shadow:0 22px 48px rgba(0,0,0,.38);
+}
 .bk-card{
   position:relative;
   padding:36px 32px 30px;
@@ -505,7 +510,6 @@ position:relative;overflow:hidden;transition:color .35s}
     linear-gradient(150deg,rgba(22,48,32,.92) 0%,rgba(14,32,22,.94) 55%,rgba(18,26,18,.95) 100%),
     var(--bg);
   box-shadow:
-    0 22px 48px rgba(0,0,0,.38),
     inset 0 1px 0 rgba(255,255,255,.06),
     inset 0 -1px 0 rgba(212,168,75,.08);
   text-align:left
@@ -724,18 +728,18 @@ position:relative;overflow:hidden;transition:color .35s}
       <div class="mq-item"><div class="mq-logo mq-mn"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt="Mille Notti"></div></div>
       <div class="mq-item"><div class="mq-logo mq-seg"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt="Segway"></div></div>
       <div class="mq-item"><div class="mq-logo mq-mark"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt="Markslöjd"></div></div>
-      <div class="mq-item"><div class="mq-logo mq-nuu"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt="Nuura"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-nuu"><img src="logos/nuura.svg" alt="Nuura"></div></div>
       <div class="mq-item"><div class="mq-logo mq-ved"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt="Vedum"></div></div>
-      <div class="mq-item"><div class="mq-logo mq-tine"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt="TineK Home"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-tine"><img src="logos/tinekhome.svg" alt="TineK Home"></div></div>
       <div class="mq-item"><div class="mq-logo mq-husq"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt="Husqvarna"></div></div>
       <!-- duplikat för sömlös loop -->
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-lex"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt=""></div></div>
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-mn"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt=""></div></div>
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-seg"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt=""></div></div>
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-mark"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-nuu"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-nuu"><img src="logos/nuura.svg" alt=""></div></div>
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-ved"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-tine"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-tine"><img src="logos/tinekhome.svg" alt=""></div></div>
       <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-husq"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt=""></div></div>
     </div>
   </div>

@@ -245,7 +245,7 @@ display:flex;align-items:center;gap:16px;margin-bottom:52px}
 .sec-h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,54px);font-weight:400;line-height:1.12;margin-bottom:48px}
 .sec-h2 em{font-style:italic;color:var(--gold)}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(212,168,75,.14);border-radius:16px;overflow:hidden}
-.sc{padding:44px 24px;text-align:center;border-right:1px solid rgba(212,168,75,.1);position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:200px}
+.sc{padding:44px 24px;text-align:center;border-right:1px solid rgba(212,168,75,.1);position:relative;overflow:hidden;transition:background .3s;min-height:220px}
 .sc:last-child{border-right:none}
 .sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
 background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .8s var(--ease)}
@@ -253,10 +253,10 @@ background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:
 .sc:hover{background:rgba(212,168,75,.04)}
 .sc-bg{position:absolute;top:-8px;right:6px;font-family:'Playfair Display',serif;font-size:90px;font-weight:700;color:rgba(212,168,75,.04);line-height:1;user-select:none;pointer-events:none}
 .sc-bg-sym{font-size:140px;font-style:italic;top:-18px;right:10px;color:rgba(212,168,75,.05)}
-.sc-num{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,46px);font-weight:500;color:var(--gold);line-height:1;display:block}
+.sc-num{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,46px);font-weight:500;color:var(--gold);line-height:1;display:block;position:absolute;top:50%;left:24px;right:24px;transform:translateY(-50%)}
 .sc-suf{font-size:.45em;color:var(--warm)}
-.sc-sub{font-size:10px;color:rgba(212,168,75,.5);margin-top:4px;letter-spacing:.06em}
-.sc-lbl{margin-top:8px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.sc-sub{position:absolute;bottom:52px;left:24px;right:24px;font-size:10px;color:rgba(212,168,75,.5);letter-spacing:.06em;margin:0}
+.sc-lbl{position:absolute;bottom:24px;left:24px;right:24px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0}
 @media(max-width:700px){.stats-grid{grid-template-columns:1fr}.sc{border-right:none;border-bottom:1px solid rgba(212,168,75,.1)}.sc:last-child{border-bottom:none}}
 
 /* ══ LEVERANSEN ════════════════════════════════ */

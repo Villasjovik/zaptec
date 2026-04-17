@@ -82,16 +82,16 @@ body.slide-in .logo-3d{opacity:1}
 body.slide-in .h-x{opacity:1;transform:scaleY(1.3) scaleX(.85) scale(1)}
 
 /* ══ DYNAMIC ISLAND NAV (top center, Apple-style) ══ */
-.snap-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9998;
+.snap-nav{position:fixed;top:28px;left:50%;transform:translateX(-50%);z-index:9998;
   display:flex;align-items:center;gap:16px;
-  background:rgba(3,26,14,.72);
-  backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);
+  background:rgba(26,38,30,.62);
+  backdrop-filter:blur(28px) saturate(1.3);-webkit-backdrop-filter:blur(28px) saturate(1.3);
   border:1px solid rgba(212,168,75,.18);border-radius:100px;padding:10px 24px;
   transition:background .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease);
-  box-shadow:0 4px 24px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.15)}
+  box-shadow:0 4px 24px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.12)}
 .snap-nav:hover,.snap-nav.nav-open{
-  background:rgba(3,26,14,.92);border-color:rgba(212,168,75,.35);
-  box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 50px rgba(212,168,75,.08)}
+  background:rgba(26,38,30,.85);border-color:rgba(212,168,75,.35);
+  box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 50px rgba(212,168,75,.08)}
 .snap-label{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);
   white-space:nowrap;display:inline-block;overflow:hidden;
   transition:max-width .5s var(--ease),color .4s}
@@ -189,7 +189,7 @@ max-width:720px;margin-bottom:56px}
   background:linear-gradient(180deg,#cfc8bb 0%,#bdb5a5 100%);
   border-top:2px solid rgba(212,168,75,.4);
   border-bottom:2px solid rgba(212,168,75,.4);
-  padding:22px 0 26px;position:relative;isolation:isolate
+  padding:30px 0 32px;position:relative;isolation:isolate
 }
 .mq-head{text-align:center;padding-bottom:18px;position:relative;z-index:3}
 .mq-lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(30,24,14,.62);font-weight:600}
@@ -1124,9 +1124,17 @@ if(spotSec){
   const label=document.getElementById('snap-label');
   const dotsWrap=document.getElementById('snap-dots');
   if(!nav||!label||!dotsWrap)return;
+  /* Nav-sektioner: "Tre spår"-punkten inkluderar partner-bar → klick scrollar
+     till partner-baren så båda blir synliga (jfr bild 1). */
+  const mqEl=document.getElementById('sec-mq');
   const sections=[
-    {id:'sec-hero',label:'Intro'},
-    {id:'sec-spar',label:'Tre spår'},
+    {id:'sec-hero',label:'Intro',scrollTo:()=>0},
+    {id:'sec-spar',label:'Tre spår',
+      /* visuell gruppering med partner-bar — scrolla så baren syns överst */
+      scrollTo:()=>mqEl?(mqEl.getBoundingClientRect().top+window.scrollY-90):document.getElementById('sec-spar').getBoundingClientRect().top+window.scrollY-30,
+      /* aktiveringsgräns för tracking = partner-bar-start */
+      trackStart:()=>mqEl?(mqEl.getBoundingClientRect().top+window.scrollY):document.getElementById('sec-spar').getBoundingClientRect().top+window.scrollY
+    },
     {id:'sec-profil',label:'Kanalen'},
     {id:'sec-pr',label:'Investering'},
     {id:'sec-cta',label:'Kontakt'}
@@ -1144,7 +1152,10 @@ if(spotSec){
     nameSpan.textContent=s.label;
     wrap.appendChild(dot);
     wrap.appendChild(nameSpan);
-    wrap.addEventListener('click',()=>s.el.scrollIntoView({behavior:'smooth'}));
+    wrap.addEventListener('click',()=>{
+      const target=s.scrollTo?s.scrollTo():(s.el.getBoundingClientRect().top+window.scrollY-20);
+      window.scrollTo({top:target,behavior:'smooth'});
+    });
     dotsWrap.appendChild(wrap);
   });
   const dots=dotsWrap.querySelectorAll('.snap-dot');
@@ -1183,15 +1194,29 @@ if(spotSec){
     },500);
   }
 
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const idx=sections.findIndex(s=>s.el===e.target);
-        if(idx>=0)updateNav(idx);
-      }
-    });
-  },{threshold:0.3});
-  sections.forEach(s=>obs.observe(s.el));
+  /* Deterministisk scroll-tracking: välj sektion vars trackStart är närmast
+     men ≤ anchor-position (35% från toppen av viewport). Fixar problemet
+     med felaktiga sektioner vid threshold-baserad IntersectionObserver. */
+  function onScroll(){
+    const anchor=window.scrollY+window.innerHeight*0.35;
+    let idx=0;
+    for(let i=0;i<sections.length;i++){
+      const s=sections[i];
+      const start=s.trackStart?s.trackStart():(s.el.getBoundingClientRect().top+window.scrollY);
+      if(anchor>=start)idx=i;
+    }
+    updateNav(idx);
+  }
+  /* Scroll-events som primär signal + rAF-poll som safety net (fångar
+     programmatisk smooth scroll där events ibland är stumma). */
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  let lastY=-1;
+  (function tick(){
+    if(window.scrollY!==lastY){lastY=window.scrollY;onScroll();}
+    requestAnimationFrame(tick);
+  })();
+  onScroll();
 
   /* Hover expand */
   document.addEventListener('mousemove',e=>{

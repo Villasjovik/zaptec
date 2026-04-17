@@ -82,13 +82,18 @@ body.slide-in .logo-3d{opacity:1}
 body.slide-in .h-x{opacity:1;transform:scaleY(1.3) scaleX(.85) scale(1)}
 
 /* ══ DYNAMIC ISLAND NAV (top center, Apple-style) ══ */
-.snap-nav{position:fixed;top:28px;left:50%;transform:translateX(-50%);z-index:9998;
+.snap-nav{position:fixed;top:28px;left:50%;z-index:9998;
   display:flex;align-items:center;gap:16px;
   background:rgba(26,38,30,.62);
   backdrop-filter:blur(28px) saturate(1.3);-webkit-backdrop-filter:blur(28px) saturate(1.3);
   border:1px solid rgba(212,168,75,.18);border-radius:100px;padding:10px 24px;
-  transition:background .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease);
+  /* startposition: ovanför viewport. Slidar ner när body får .shrink
+     (samtidigt som hero-logotyperna krymper till slutposition) */
+  transform:translate(-50%,-220%);opacity:0;
+  transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .7s var(--ease),
+             background .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease);
   box-shadow:0 4px 24px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.12)}
+body.shrink .snap-nav{transform:translate(-50%,0);opacity:1}
 .snap-nav:hover,.snap-nav.nav-open{
   background:rgba(26,38,30,.85);border-color:rgba(212,168,75,.35);
   box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 50px rgba(212,168,75,.08)}
@@ -198,19 +203,31 @@ max-width:720px;margin-bottom:56px}
 .mq-grid{position:relative;overflow:hidden;max-width:100%;margin:0 auto;
   mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
-.mq-track{display:flex;align-items:center;gap:72px;width:max-content;
+.mq-track{display:flex;align-items:center;gap:60px;width:max-content;
   animation:mq-scroll 42s linear infinite;will-change:transform}
 .mq-track:hover{animation-play-state:paused}
 @keyframes mq-scroll{
   from{transform:translateX(0)}
   to  {transform:translateX(-50%)}
 }
-.mq-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;height:58px}
+.mq-item{position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;height:58px}
 .mq-logo{display:flex;align-items:center;justify-content:center;height:58px}
 .mq-logo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;
   mix-blend-mode:multiply;opacity:.86;
   transition:opacity .3s}
 .mq-item:hover .mq-logo img{opacity:1}
+
+/* Guldigt X-separator mellan loggor — samma stil som header-X men mindre */
+.mq-item::after{
+  content:'×';
+  position:absolute;right:-36px;top:50%;
+  transform:translateY(-50%) scaleY(1.25) scaleX(.9);
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+  font-size:22px;line-height:1;
+  color:rgba(120,90,30,.35);
+  pointer-events:none;
+  text-shadow:0 1px 0 rgba(255,255,255,.25)
+}
 
 /* Per-logo bredd — matchar visuell storlek baserat på faktiskt content i filen
    (inte pixel-dimensionerna, eftersom vissa filer har whitespace-padding) */
@@ -223,12 +240,18 @@ max-width:720px;margin-bottom:56px}
 .mq-tine{width:84px}      /* TineK Home — kvadratisk JPG, content i mitten */
 .mq-husq{width:90px}      /* Husqvarna — kvadratisk JPG, content i mitten */
 
+/* Mille Notti har "EST. 1991 — SWEDEN" subtitel som drar ner huvudordet —
+   lyft upp så ordet MILLE NOTTI alignar med de andra loggornas textlinje */
+.mq-mn img{transform:translateY(-7px)}
+
 @media(max-width:860px){
-  .mq-track{gap:52px}
+  .mq-track{gap:46px}
   .mq-item, .mq-logo{height:48px}
+  .mq-item::after{right:-27px;font-size:18px}
   .mq-lex{width:134px} .mq-mn{width:98px} .mq-seg{width:122px}
   .mq-mark{width:94px} .mq-nuu{width:138px} .mq-ved{width:118px}
   .mq-tine{width:72px} .mq-husq{width:76px}
+  .mq-mn img{transform:translateY(-5px)}
 }
 
 /* ══ TRE SPÅR ═════════════════════════════════════ */
@@ -471,12 +494,12 @@ position:relative;overflow:hidden;transition:color .35s}
 }
 .bk-panel.open{max-height:1200px;opacity:1;margin-top:24px;pointer-events:auto}
 .bk-card{
+  position:relative;
   padding:36px 32px 30px;
   border:1px solid rgba(212,168,75,.22);border-top:1.5px solid rgba(212,168,75,.45);
   border-radius:22px;
-  background:
-    linear-gradient(150deg,rgba(212,168,75,.08) 0%,rgba(212,168,75,.02) 55%,rgba(0,122,62,.06) 100%),
-    rgba(4,22,12,.55);
+  overflow:hidden; /* klipper allt innehåll till rundade hörn */
+  background:linear-gradient(150deg,rgba(22,48,32,.62) 0%,rgba(14,32,22,.58) 55%,rgba(28,22,12,.52) 100%);
   backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
   box-shadow:
     0 28px 72px rgba(0,0,0,.55),
@@ -1164,11 +1187,9 @@ if(spotSec){
   let current=0;
   label.style.maxWidth=label.scrollWidth+'px';
 
-  let dotTimer=0;
   function updateNav(idx){
     if(idx===current)return;
     current=idx;
-    clearTimeout(dotTimer);
     if(window.gsap)gsap.killTweensOf(label);
     label.style.transition='none';
     const oldW=label.offsetWidth;
@@ -1188,10 +1209,9 @@ if(spotSec){
       label.style.width=newW+'px';
       setTimeout(()=>{label.style.width='';label.style.maxWidth=newW+'px';label.style.transition='';label.style.overflow='';},500);
     }
-    dotTimer=setTimeout(()=>{
-      dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
-      wraps.forEach((w,i)=>w.classList.toggle('is-active',i===idx));
-    },500);
+    /* Dot-byte synkat med label-bytet — ingen delay */
+    dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+    wraps.forEach((w,i)=>w.classList.toggle('is-active',i===idx));
   }
 
   /* Deterministisk scroll-tracking: välj sektion vars trackStart är närmast

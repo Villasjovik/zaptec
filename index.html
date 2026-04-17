@@ -762,7 +762,7 @@ document.querySelectorAll('.gc,.lc,.sp-c').forEach(card=>{
 const spotSec=document.getElementById('sec-profil');
 if(spotSec){
   spotSec.addEventListener('mousemove',e=>{
-    const r=spotSec.getBoundingClientRect();spotSec.style.background=`radial-gradient(600px circle at ${e.clientX-r.left}px ${e.clientY-r.top}px,rgba(1,142,71,.09),transparent 50%),var(--bg2)`;
+    const r=spotSec.getBoundingClientRect();spotSec.style.background=`radial-gradient(600px circle at ${e.clientX-r.left}px ${e.clientY-r.top}px,rgba(1,142,71,.09),transparent 50%),radial-gradient(ellipse 90% 80% at 50% 50%,var(--bg3) 0%,var(--bg) 70%)`;
   });
 }
 

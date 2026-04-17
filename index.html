@@ -234,7 +234,7 @@ max-width:720px;margin-bottom:56px}
 }
 
 /* ══ KANALEN ════════════════════════════════════ */
-#sec-profil{position:relative;background:var(--bg2);padding:96px 24px;overflow:hidden}
+#sec-profil{position:relative;background:radial-gradient(ellipse 90% 80% at 50% 50%,var(--bg3) 0%,var(--bg) 70%);padding:120px 24px;overflow:hidden}
 .p-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
 .p-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(1,142,71,.22),transparent);top:-150px;right:-100px;animation:orbf 28s ease-in-out infinite}
 .p-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(212,168,75,.1),transparent);bottom:-120px;left:-100px;animation:orbf 22s ease-in-out infinite;animation-delay:-11s}
@@ -277,18 +277,6 @@ background:radial-gradient(circle at 50% 0%,rgba(212,168,75,.09),transparent 70%
 .lc-tag{display:inline-block;margin-top:18px;padding:5px 14px;border:1px solid rgba(212,168,75,.3);
 border-radius:100px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 @media(max-width:700px){.lev-grid{grid-template-columns:1fr}}
-
-/* ══ PARALLAX TEXT ══════════════════════════════ */
-#sec-px{background:radial-gradient(ellipse 90% 80% at 50% 50%,var(--bg3) 0%,var(--bg) 70%);overflow:hidden;position:relative;min-height:480px}
-.px-row{position:absolute;left:0;right:0;font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,56px);
-font-weight:400;line-height:1;white-space:nowrap;will-change:transform}
-.px-row.go{color:rgba(212,168,75,.28);top:44px}
-.px-row.ou{color:transparent;-webkit-text-stroke:1px rgba(212,168,75,.28);bottom:44px}
-.px-mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-z-index:2;pointer-events:none;text-align:center;padding:0 24px}
-.px-tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.px-hl{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,38px);font-weight:400;line-height:1.3;color:var(--ink)}
-.px-hl em{font-style:italic;color:var(--gold)}
 
 .leather-tex{
   position:absolute;inset:0;pointer-events:none;z-index:0;
@@ -541,7 +529,7 @@ position:relative;overflow:hidden;transition:color .35s}
   <div class="p-orb p-orb-2" aria-hidden="true"></div>
   <div class="sec-inner">
     <p class="sec-lbl rv">Kanalen</p>
-    <h2 class="sec-h2 rv">Rätt känsla. <em>Rätt publik.</em></h2>
+    <h2 class="sec-h2 rv">Rätt hem. <em>Rätt&nbsp;laddning.</em></h2>
     <div class="stats-grid">
       <div class="sc rv d1">
         <div class="sc-bg" aria-hidden="true">164</div>
@@ -559,18 +547,6 @@ position:relative;overflow:hidden;transition:color .35s}
         <p class="sc-lbl" style="visibility:hidden">—</p>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="gd"></div>
-
-<!-- ══ PARALLAX TEXT ═════════════════════════════════ -->
-<section id="sec-px" aria-hidden="true">
-  <div class="px-row go" id="pxr1">Powers adventure &middot; Teknik som smycke &middot; Powers adventure &middot; Teknik som smycke &middot; Powers adventure</div>
-  <div class="px-row ou" id="pxr2">164 000 följare &middot; Villa Sjövik &middot; 164 000 följare &middot; Villa Sjövik &middot; 164 000 följare</div>
-  <div class="px-mid">
-    <p class="px-tag">Samarbete 2026</p>
-    <p class="px-hl">Zaptec Go. <em>Rätt miljö, rätt känsla.</em></p>
   </div>
 </section>
 
@@ -698,9 +674,6 @@ let skewTarget=0;
 ScrollTrigger.create({onUpdate:s=>{skewTarget=Math.max(-6,Math.min(6,s.getVelocity()/600))}});
 gsap.to('#pwrap',{skewY:()=>skewTarget,ease:'power3',overwrite:'auto',duration:.6,repeat:-1,
   onRepeat(){skewTarget*=.92;if(Math.abs(skewTarget)<.01)skewTarget=0}});
-
-gsap.to('#pxr1',{x:'-12%',ease:'none',scrollTrigger:{trigger:'#sec-px',scrub:.8}});
-gsap.to('#pxr2',{x:'10%',ease:'none',scrollTrigger:{trigger:'#sec-px',scrub:1}});
 
 gsap.from('#sec-cta h2',{y:60,opacity:0,duration:1,ease:'power2.out',
   scrollTrigger:{trigger:'#sec-cta',start:'top 70%',once:true}});

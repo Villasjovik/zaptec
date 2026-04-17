@@ -185,36 +185,50 @@ max-width:720px;margin-bottom:56px}
 
 /* ══ PARTNERS TICKER ════════════════════════════ */
 #sec-mq{
-  /* Neutral ljus linne — varm men utan gulton */
-  background:linear-gradient(180deg,#efebe3 0%,#e5e0d5 100%);
+  /* Mid-tone greige — varken guldton eller vit, neutral sten */
+  background:linear-gradient(180deg,#cfc8bb 0%,#bdb5a5 100%);
   border-top:2px solid rgba(212,168,75,.4);
   border-bottom:2px solid rgba(212,168,75,.4);
   padding:22px 0 26px;position:relative;isolation:isolate
 }
 .mq-head{text-align:center;padding-bottom:18px;position:relative;z-index:3}
-.mq-lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(40,30,15,.55);font-weight:600}
+.mq-lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(30,24,14,.62);font-weight:600}
 
 /* ── RTL karusell — statiska, platta 2D-loggor, inga spin/tilt ── */
 .mq-grid{position:relative;overflow:hidden;max-width:100%;margin:0 auto;
   mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
-.mq-track{display:flex;align-items:center;gap:80px;width:max-content;
+.mq-track{display:flex;align-items:center;gap:72px;width:max-content;
   animation:mq-scroll 42s linear infinite;will-change:transform}
 .mq-track:hover{animation-play-state:paused}
 @keyframes mq-scroll{
   from{transform:translateX(0)}
   to  {transform:translateX(-50%)}
 }
-.mq-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;height:54px}
-.mq-logo{width:130px;height:54px;display:flex;align-items:center;justify-content:center}
-.mq-logo img{width:100%;height:100%;object-fit:contain;
-  mix-blend-mode:multiply;opacity:.85;
+.mq-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;height:58px}
+.mq-logo{display:flex;align-items:center;justify-content:center;height:58px}
+.mq-logo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;
+  mix-blend-mode:multiply;opacity:.86;
   transition:opacity .3s}
 .mq-item:hover .mq-logo img{opacity:1}
 
+/* Per-logo bredd — matchar visuell storlek baserat på faktiskt content i filen
+   (inte pixel-dimensionerna, eftersom vissa filer har whitespace-padding) */
+.mq-lex{width:160px}      /* Lexington — wordmark, vid */
+.mq-mn{width:118px}       /* Mille Notti — kompakt wordmark */
+.mq-seg{width:146px}      /* Segway — symbol + wordmark */
+.mq-mark{width:112px}     /* Markslöjd — kompakt wordmark */
+.mq-nuu{width:164px}      /* Nuura — tunn elegant wordmark */
+.mq-ved{width:140px}      /* Vedum — wordmark */
+.mq-tine{width:84px}      /* TineK Home — kvadratisk JPG, content i mitten */
+.mq-husq{width:90px}      /* Husqvarna — kvadratisk JPG, content i mitten */
+
 @media(max-width:860px){
-  .mq-track{gap:56px}
-  .mq-logo{width:110px;height:46px}
+  .mq-track{gap:52px}
+  .mq-item, .mq-logo{height:48px}
+  .mq-lex{width:134px} .mq-mn{width:98px} .mq-seg{width:122px}
+  .mq-mark{width:94px} .mq-nuu{width:138px} .mq-ved{width:118px}
+  .mq-tine{width:72px} .mq-husq{width:76px}
 }
 
 /* ══ TRE SPÅR ═════════════════════════════════════ */
@@ -448,6 +462,140 @@ position:relative;overflow:hidden;transition:color .35s}
 .cta-det a{color:var(--muted);text-decoration:none;transition:color .2s}
 .cta-det a:hover{color:var(--gold)}
 
+/* ══ BOKNINGSFLOW ══════════════════════════════════ */
+.bk-wrap{width:100%;max-width:640px;margin:32px auto 0;position:relative;z-index:2}
+.bk-panel{
+  overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .9s var(--ease),opacity .6s var(--ease),margin-top .6s var(--ease);
+  margin-top:0;pointer-events:none;
+}
+.bk-panel.open{max-height:1200px;opacity:1;margin-top:24px;pointer-events:auto}
+.bk-card{
+  padding:36px 32px 30px;
+  border:1px solid rgba(212,168,75,.22);border-top:1.5px solid rgba(212,168,75,.45);
+  border-radius:22px;
+  background:
+    linear-gradient(150deg,rgba(212,168,75,.08) 0%,rgba(212,168,75,.02) 55%,rgba(0,122,62,.06) 100%),
+    rgba(4,22,12,.55);
+  backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
+  box-shadow:
+    0 28px 72px rgba(0,0,0,.55),
+    0 10px 24px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -1px 0 rgba(212,168,75,.08);
+  text-align:left
+}
+.bk-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.bk-title{font-family:'Playfair Display',serif;font-size:20px;line-height:1.2;color:var(--ink)}
+.bk-title em{font-style:italic;color:var(--gold)}
+.bk-close{background:transparent;border:1px solid rgba(212,168,75,.3);color:var(--gold);
+  width:32px;height:32px;border-radius:50%;cursor:none;font-size:14px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:all .3s}
+.bk-close:hover{background:rgba(212,168,75,.12);border-color:var(--gold);transform:rotate(90deg)}
+
+/* Progress dots */
+.bk-steps{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:26px}
+.bk-step{display:flex;align-items:center;gap:10px;color:rgba(242,237,228,.35);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;transition:color .4s}
+.bk-step .bk-dot{width:8px;height:8px;border-radius:50%;background:rgba(242,237,228,.18);transition:all .4s}
+.bk-step.active{color:var(--gold)}
+.bk-step.active .bk-dot{background:var(--gold);box-shadow:0 0 0 4px rgba(212,168,75,.15)}
+.bk-step.done{color:rgba(212,168,75,.6)}
+.bk-step.done .bk-dot{background:rgba(212,168,75,.6)}
+.bk-sep{width:28px;height:1px;background:rgba(242,237,228,.18)}
+
+/* Stages */
+.bk-stage{display:none;animation:bk-fade .5s var(--ease)}
+.bk-stage.active{display:block}
+@keyframes bk-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bk-stage h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:400}
+.bk-stage .bk-sub{font-size:12px;color:var(--muted);margin-bottom:20px;letter-spacing:.04em}
+
+/* Calendar */
+.bk-cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.bk-cal-month{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);letter-spacing:.06em;text-transform:capitalize}
+.bk-cal-nav{display:flex;gap:8px}
+.bk-cal-btn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(212,168,75,.25);background:transparent;color:var(--gold);cursor:none;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .25s}
+.bk-cal-btn:hover{background:rgba(212,168,75,.1);border-color:var(--gold)}
+.bk-cal-btn:disabled{opacity:.25;cursor:not-allowed}
+.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.bk-cal-hdr{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.35);text-align:center;padding:6px 0 4px;font-weight:600}
+.bk-cal-day{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink);
+  border-radius:10px;cursor:none;border:1px solid transparent;background:transparent;
+  transition:all .22s;font-family:'Inter',sans-serif}
+.bk-cal-day:not(.disabled):hover{background:rgba(212,168,75,.08);border-color:rgba(212,168,75,.25)}
+.bk-cal-day.disabled{color:rgba(242,237,228,.15);cursor:not-allowed}
+.bk-cal-day.weekend{color:rgba(242,237,228,.22);cursor:not-allowed}
+.bk-cal-day.today{color:var(--gold);font-weight:600}
+.bk-cal-day.selected{background:var(--gold)!important;color:var(--bg)!important;border-color:var(--gold)!important;font-weight:600}
+.bk-cal-day.empty{pointer-events:none}
+
+/* Time slots */
+.bk-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+.bk-slot{padding:12px 6px;border:1px solid rgba(212,168,75,.25);border-radius:10px;background:transparent;
+  color:var(--ink);font-size:13px;font-family:'Inter',sans-serif;letter-spacing:.04em;
+  cursor:none;transition:all .25s;text-align:center}
+.bk-slot:hover{background:rgba(212,168,75,.1);border-color:var(--gold)}
+.bk-slot.selected{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:600}
+.bk-sel-date{padding:12px 16px;margin-bottom:18px;border-radius:12px;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.18);
+  font-size:12px;color:var(--ink);letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+.bk-sel-date::before{content:'✓';color:var(--gold);font-size:13px}
+
+/* Form */
+.bk-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bk-form .bk-full{grid-column:1 / -1}
+.bk-field{display:flex;flex-direction:column;gap:6px}
+.bk-field label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,228,.5);font-weight:600}
+.bk-field input,.bk-field textarea{
+  background:rgba(0,0,0,.25);border:1px solid rgba(212,168,75,.18);border-radius:10px;
+  padding:11px 14px;color:var(--ink);font-size:13px;font-family:'Inter',sans-serif;
+  transition:border-color .25s,background .25s;outline:none;resize:none;
+  cursor:none
+}
+.bk-field input:focus,.bk-field textarea:focus{border-color:rgba(212,168,75,.6);background:rgba(0,0,0,.35)}
+.bk-field input::placeholder,.bk-field textarea::placeholder{color:rgba(242,237,228,.25)}
+.bk-field.err input,.bk-field.err textarea{border-color:rgba(220,80,80,.6)}
+.bk-field textarea{min-height:88px}
+.bk-summary{padding:14px 16px;margin-bottom:14px;border-radius:12px;background:rgba(0,122,62,.08);border:1px solid rgba(0,122,62,.25);
+  font-size:12px;color:var(--ink);letter-spacing:.04em;line-height:1.7}
+.bk-summary b{color:var(--gold);font-weight:600}
+
+/* Nav buttons */
+.bk-nav{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid rgba(212,168,75,.12)}
+.bk-btn{padding:13px 28px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  cursor:none;border:1.5px solid var(--gold);background:transparent;color:var(--gold);
+  transition:all .3s;font-family:'Inter',sans-serif}
+.bk-btn:hover:not(:disabled){background:var(--gold);color:var(--bg)}
+.bk-btn:disabled{opacity:.3;cursor:not-allowed}
+.bk-btn.primary{background:var(--gold);color:var(--bg)}
+.bk-btn.primary:hover:not(:disabled){background:var(--gold2);border-color:var(--gold2)}
+.bk-btn.ghost{border-color:rgba(212,168,75,.35);color:rgba(212,168,75,.75)}
+.bk-btn.ghost:hover:not(:disabled){border-color:var(--gold);color:var(--gold);background:transparent}
+
+/* Success */
+.bk-done{text-align:center;padding:18px 0}
+.bk-done-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,75,.25),rgba(212,168,75,.05));
+  border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:26px;animation:bk-pop .7s cubic-bezier(.34,1.56,.64,1)}
+@keyframes bk-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.bk-done h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:8px;color:var(--ink)}
+.bk-done h3 em{font-style:italic;color:var(--gold)}
+.bk-done p{font-size:13px;color:var(--muted);line-height:1.7;max-width:380px;margin:0 auto}
+
+/* Error banner */
+.bk-error{padding:10px 14px;margin-bottom:14px;border-radius:10px;background:rgba(220,80,80,.1);border:1px solid rgba(220,80,80,.3);
+  font-size:12px;color:rgba(255,210,210,.9);letter-spacing:.03em}
+
+@media(max-width:640px){
+  .bk-card{padding:28px 22px 24px}
+  .bk-slots{grid-template-columns:repeat(3,1fr)}
+  .bk-form{grid-template-columns:1fr}
+  .bk-sep{width:14px}
+  .bk-step span{display:none}
+  .bk-nav{flex-direction:column-reverse}
+  .bk-btn{width:100%}
+}
+
 /* REVEAL */
 .body-loaded .rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .body-loaded .rv.in{opacity:1;transform:none}
@@ -547,23 +695,23 @@ position:relative;overflow:hidden;transition:color .35s}
   </div>
   <div class="mq-grid">
     <div class="mq-track">
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt="Lexington"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt="Mille Notti"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt="Segway"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt="Markslöjd"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt="Nuura"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt="Vedum"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt="TineK Home"></div></div>
-      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt="Husqvarna"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-lex"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt="Lexington"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-mn"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt="Mille Notti"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-seg"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt="Segway"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-mark"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt="Markslöjd"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-nuu"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt="Nuura"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-ved"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt="Vedum"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-tine"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt="TineK Home"></div></div>
+      <div class="mq-item"><div class="mq-logo mq-husq"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt="Husqvarna"></div></div>
       <!-- duplikat för sömlös loop -->
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt=""></div></div>
-      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-lex"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-mn"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-seg"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-mark"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-nuu"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-ved"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-tine"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo mq-husq"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt=""></div></div>
     </div>
   </div>
 </div>
@@ -704,11 +852,117 @@ position:relative;overflow:hidden;transition:color .35s}
         </a>
       </div>
       <div class="mag-w">
-        <a class="mag-btn ghost ch" href="mailto:carin@villasjovik.se?subject=Boka%20m%C3%B6te%20%E2%80%94%20Zaptec%20%C3%97%20Villa%20Sj%C3%B6vik">
+        <button class="mag-btn ghost ch" type="button" id="bk-open" aria-expanded="false" aria-controls="bk-panel">
           <span>Boka möte</span>
-        </a>
+        </button>
       </div>
     </div>
+
+    <!-- BOKNINGSFLOW -->
+    <div class="bk-wrap">
+      <div class="bk-panel" id="bk-panel" role="region" aria-label="Bokningsflow" aria-hidden="true">
+        <div class="bk-card">
+          <div class="bk-head">
+            <h3 class="bk-title">Boka ett <em>första möte</em></h3>
+            <button class="bk-close ch" type="button" id="bk-close" aria-label="Stäng">×</button>
+          </div>
+
+          <div class="bk-steps" role="tablist">
+            <div class="bk-step active" data-step="1"><span class="bk-dot"></span><span>Datum</span></div>
+            <div class="bk-sep"></div>
+            <div class="bk-step" data-step="2"><span class="bk-dot"></span><span>Tid</span></div>
+            <div class="bk-sep"></div>
+            <div class="bk-step" data-step="3"><span class="bk-dot"></span><span>Uppgifter</span></div>
+          </div>
+
+          <!-- STAGE 1: DATUM -->
+          <div class="bk-stage active" data-stage="1">
+            <h3>Välj datum</h3>
+            <p class="bk-sub">Vardagar, 30–45 min. Digitalt eller på plats i Villa Sjövik.</p>
+            <div class="bk-cal-head">
+              <span class="bk-cal-month" id="bk-cal-month"></span>
+              <div class="bk-cal-nav">
+                <button class="bk-cal-btn ch" type="button" id="bk-cal-prev" aria-label="Föregående månad">‹</button>
+                <button class="bk-cal-btn ch" type="button" id="bk-cal-next" aria-label="Nästa månad">›</button>
+              </div>
+            </div>
+            <div class="bk-cal-grid" id="bk-cal-grid"></div>
+            <div class="bk-nav">
+              <button class="bk-btn ghost ch" type="button" id="bk-cancel">Avbryt</button>
+              <button class="bk-btn primary ch" type="button" id="bk-to-time" disabled>Välj tid →</button>
+            </div>
+          </div>
+
+          <!-- STAGE 2: TID -->
+          <div class="bk-stage" data-stage="2">
+            <h3>Välj tid</h3>
+            <p class="bk-sub">Alla tider i svensk tid (CET/CEST).</p>
+            <div class="bk-sel-date" id="bk-sel-date"></div>
+            <div class="bk-slots" id="bk-slots">
+              <button class="bk-slot ch" type="button" data-time="09:00">09:00</button>
+              <button class="bk-slot ch" type="button" data-time="10:00">10:00</button>
+              <button class="bk-slot ch" type="button" data-time="11:00">11:00</button>
+              <button class="bk-slot ch" type="button" data-time="13:00">13:00</button>
+              <button class="bk-slot ch" type="button" data-time="14:00">14:00</button>
+              <button class="bk-slot ch" type="button" data-time="15:00">15:00</button>
+              <button class="bk-slot ch" type="button" data-time="16:00">16:00</button>
+              <button class="bk-slot ch" type="button" data-time="17:00">17:00</button>
+            </div>
+            <div class="bk-nav">
+              <button class="bk-btn ghost ch" type="button" data-back="1">← Tillbaka</button>
+              <button class="bk-btn primary ch" type="button" id="bk-to-form" disabled>Fortsätt →</button>
+            </div>
+          </div>
+
+          <!-- STAGE 3: UPPGIFTER -->
+          <div class="bk-stage" data-stage="3">
+            <h3>Dina uppgifter</h3>
+            <p class="bk-sub">Vi bekräftar bokningen inom 24h.</p>
+            <div class="bk-summary" id="bk-summary"></div>
+            <div class="bk-error" id="bk-err" style="display:none"></div>
+            <form class="bk-form" id="bk-form" novalidate>
+              <div class="bk-field">
+                <label for="bk-name">Namn</label>
+                <input type="text" id="bk-name" name="name" placeholder="För- och efternamn" required autocomplete="name">
+              </div>
+              <div class="bk-field">
+                <label for="bk-company">Företag</label>
+                <input type="text" id="bk-company" name="company" placeholder="Zaptec / varumärke" required autocomplete="organization">
+              </div>
+              <div class="bk-field">
+                <label for="bk-email">E-post</label>
+                <input type="email" id="bk-email" name="email" placeholder="namn@företag.se" required autocomplete="email">
+              </div>
+              <div class="bk-field">
+                <label for="bk-phone">Telefon <span style="opacity:.5;text-transform:none;letter-spacing:0">(valfritt)</span></label>
+                <input type="tel" id="bk-phone" name="phone" placeholder="+46 70 123 45 67" autocomplete="tel">
+              </div>
+              <div class="bk-field bk-full">
+                <label for="bk-msg">Meddelande <span style="opacity:.5;text-transform:none;letter-spacing:0">(valfritt)</span></label>
+                <textarea id="bk-msg" name="message" placeholder="Kort om vad ni vill diskutera — produkt, tidsplan, mål…"></textarea>
+              </div>
+            </form>
+            <div class="bk-nav">
+              <button class="bk-btn ghost ch" type="button" data-back="2">← Tillbaka</button>
+              <button class="bk-btn primary ch" type="button" id="bk-submit">Skicka bokning →</button>
+            </div>
+          </div>
+
+          <!-- STAGE 4: SUCCESS -->
+          <div class="bk-stage" data-stage="4">
+            <div class="bk-done">
+              <div class="bk-done-icon">✓</div>
+              <h3>Tack — <em>bokningen är skickad.</em></h3>
+              <p id="bk-done-text">Vi återkommer inom 24h med en kalenderinbjudan och bekräftelse på tiden.</p>
+            </div>
+            <div class="bk-nav" style="justify-content:center;border-top:none;padding-top:8px">
+              <button class="bk-btn ghost ch" type="button" id="bk-done-close">Stäng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="cta-div" aria-hidden="true"></div>
     <div class="cta-con rv">
       <p class="cta-name">Villa Sjövik</p>
@@ -743,6 +997,21 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.le
 document.querySelectorAll('a,.snap-dot-wrap,.pill,.mag-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
   el.addEventListener('mouseleave',()=>{document.body.classList.remove('ch');document.body.classList.remove('ct')});
+});
+// Delegation för bokningsflow (kalenderdagar skapas dynamiskt)
+const BK_HOVER_SEL='.bk-close,.bk-cal-btn,.bk-slot,.bk-btn';
+const BK_DAY_SEL='.bk-cal-day';
+const BK_TEXT_SEL='.bk-field input,.bk-field textarea';
+document.addEventListener('mouseover',e=>{
+  const t=e.target;
+  if(t.matches&&t.matches(BK_HOVER_SEL)){document.body.classList.add('ch');return;}
+  if(t.matches&&t.matches(BK_DAY_SEL)&&!t.classList.contains('empty')&&!t.classList.contains('disabled')&&!t.classList.contains('weekend')){document.body.classList.add('ch');return;}
+  if(t.matches&&t.matches(BK_TEXT_SEL)){document.body.classList.add('ct');}
+});
+document.addEventListener('mouseout',e=>{
+  const t=e.target;
+  if(t.matches&&(t.matches(BK_HOVER_SEL)||t.matches(BK_DAY_SEL))){document.body.classList.remove('ch');document.body.classList.remove('ct');}
+  if(t.matches&&t.matches(BK_TEXT_SEL)){document.body.classList.remove('ct');}
 });
 
 /* ── SCROLL PROGRESS ── */
@@ -938,6 +1207,261 @@ if(spotSec){
     if(e.key==='ArrowDown'&&current<sections.length-1){e.preventDefault();sections[current+1].el.scrollIntoView({behavior:'smooth'})}
     if(e.key==='ArrowUp'&&current>0){e.preventDefault();sections[current-1].el.scrollIntoView({behavior:'smooth'})}
   });
+})();
+
+/* ══════════════════════════════════════════════════
+   BOKNINGSFLOW — kalender, tidsval, formulär, email
+   ══════════════════════════════════════════════════ */
+(function(){
+  const SV_MONTHS=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+  const SV_DAYS_SHORT=['må','ti','on','to','fr','lö','sö'];
+  const SV_DAYS_LONG=['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+  const RECIPIENT='lucasnorberg3@gmail.com';
+
+  const panel=document.getElementById('bk-panel');
+  const openBtn=document.getElementById('bk-open');
+  const closeBtn=document.getElementById('bk-close');
+  const cancelBtn=document.getElementById('bk-cancel');
+  const doneCloseBtn=document.getElementById('bk-done-close');
+  if(!panel||!openBtn) return;
+
+  const stages=panel.querySelectorAll('.bk-stage');
+  const steps=panel.querySelectorAll('.bk-step');
+  const monthLbl=document.getElementById('bk-cal-month');
+  const calGrid=document.getElementById('bk-cal-grid');
+  const prevBtn=document.getElementById('bk-cal-prev');
+  const nextBtn=document.getElementById('bk-cal-next');
+  const toTimeBtn=document.getElementById('bk-to-time');
+  const selDateEl=document.getElementById('bk-sel-date');
+  const slotsEl=document.getElementById('bk-slots');
+  const toFormBtn=document.getElementById('bk-to-form');
+  const summaryEl=document.getElementById('bk-summary');
+  const form=document.getElementById('bk-form');
+  const submitBtn=document.getElementById('bk-submit');
+  const errEl=document.getElementById('bk-err');
+  const doneText=document.getElementById('bk-done-text');
+  const backBtns=panel.querySelectorAll('[data-back]');
+
+  const state={stage:1,viewY:0,viewM:0,selDate:null,selTime:null};
+  const today=new Date();today.setHours(0,0,0,0);
+  state.viewY=today.getFullYear();state.viewM=today.getMonth();
+
+  /* ── Öppna / stäng panel ── */
+  function openPanel(){
+    panel.classList.add('open');panel.setAttribute('aria-hidden','false');
+    openBtn.setAttribute('aria-expanded','true');
+    goStage(1);renderCalendar();
+    setTimeout(()=>{panel.scrollIntoView({behavior:'smooth',block:'center'});},250);
+  }
+  function closePanel(){
+    panel.classList.remove('open');panel.setAttribute('aria-hidden','true');
+    openBtn.setAttribute('aria-expanded','false');
+  }
+  openBtn.addEventListener('click',openPanel);
+  closeBtn.addEventListener('click',closePanel);
+  cancelBtn.addEventListener('click',closePanel);
+  doneCloseBtn.addEventListener('click',()=>{closePanel();resetFlow();});
+
+  /* ── Stage-växling ── */
+  function goStage(n){
+    state.stage=n;
+    stages.forEach(s=>s.classList.toggle('active',+s.dataset.stage===n));
+    steps.forEach(s=>{
+      const sn=+s.dataset.step;
+      s.classList.toggle('active',sn===n);
+      s.classList.toggle('done',sn<n);
+    });
+  }
+  backBtns.forEach(b=>b.addEventListener('click',()=>goStage(+b.dataset.back)));
+
+  /* ── Kalender ── */
+  function renderCalendar(){
+    const y=state.viewY,m=state.viewM;
+    monthLbl.textContent=`${SV_MONTHS[m]} ${y}`;
+
+    // Disable prev if we're at current month
+    const atCurrent=(y===today.getFullYear()&&m===today.getMonth());
+    prevBtn.disabled=atCurrent;
+    // Max 3 months forward
+    const maxDate=new Date(today);maxDate.setMonth(maxDate.getMonth()+3);
+    nextBtn.disabled=(y===maxDate.getFullYear()&&m>=maxDate.getMonth());
+
+    calGrid.innerHTML='';
+    SV_DAYS_SHORT.forEach(d=>{
+      const h=document.createElement('div');h.className='bk-cal-hdr';h.textContent=d;
+      calGrid.appendChild(h);
+    });
+
+    const firstDay=new Date(y,m,1);
+    // JS: 0=Sun, 1=Mon ... vi vill börja med Mån
+    let startOffset=firstDay.getDay()-1;if(startOffset<0)startOffset=6;
+    for(let i=0;i<startOffset;i++){
+      const e=document.createElement('div');e.className='bk-cal-day empty';
+      calGrid.appendChild(e);
+    }
+    const daysInMonth=new Date(y,m+1,0).getDate();
+    for(let d=1;d<=daysInMonth;d++){
+      const dt=new Date(y,m,d);
+      const btn=document.createElement('button');
+      btn.type='button';btn.className='bk-cal-day ch';btn.textContent=d;
+      const dow=dt.getDay(); // 0=Sun,6=Sat
+      const isPast=dt<today;
+      const isWeekend=(dow===0||dow===6);
+      const isToday=dt.getTime()===today.getTime();
+      if(isPast)btn.classList.add('disabled');
+      else if(isWeekend)btn.classList.add('weekend');
+      if(isToday)btn.classList.add('today');
+      if(state.selDate&&dt.getTime()===state.selDate.getTime())btn.classList.add('selected');
+
+      if(!isPast&&!isWeekend){
+        btn.addEventListener('click',()=>selectDate(dt));
+      }else{
+        btn.disabled=true;
+      }
+      calGrid.appendChild(btn);
+    }
+  }
+  function selectDate(dt){
+    state.selDate=dt;
+    renderCalendar();
+    toTimeBtn.disabled=false;
+  }
+  prevBtn.addEventListener('click',()=>{
+    state.viewM--;if(state.viewM<0){state.viewM=11;state.viewY--;}
+    renderCalendar();
+  });
+  nextBtn.addEventListener('click',()=>{
+    state.viewM++;if(state.viewM>11){state.viewM=0;state.viewY++;}
+    renderCalendar();
+  });
+
+  toTimeBtn.addEventListener('click',()=>{
+    if(!state.selDate)return;
+    const d=state.selDate;
+    selDateEl.textContent=`${SV_DAYS_LONG[d.getDay()]} ${d.getDate()} ${SV_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    // reset tidsval
+    state.selTime=null;
+    slotsEl.querySelectorAll('.bk-slot').forEach(s=>s.classList.remove('selected'));
+    toFormBtn.disabled=true;
+    goStage(2);
+  });
+
+  /* ── Tidsval ── */
+  slotsEl.querySelectorAll('.bk-slot').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      slotsEl.querySelectorAll('.bk-slot').forEach(s=>s.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.selTime=btn.dataset.time;
+      toFormBtn.disabled=false;
+    });
+  });
+
+  toFormBtn.addEventListener('click',()=>{
+    if(!state.selTime)return;
+    const d=state.selDate;
+    summaryEl.innerHTML=`Möte bokas: <b>${SV_DAYS_LONG[d.getDay()]} ${d.getDate()} ${SV_MONTHS[d.getMonth()]}, kl ${state.selTime}</b>`;
+    goStage(3);
+  });
+
+  /* ── Skicka bokning ── */
+  function validate(){
+    let ok=true;
+    ['bk-name','bk-company','bk-email'].forEach(id=>{
+      const el=document.getElementById(id);
+      const v=(el.value||'').trim();
+      const wrap=el.closest('.bk-field');
+      if(!v){wrap.classList.add('err');ok=false}
+      else wrap.classList.remove('err');
+    });
+    const email=document.getElementById('bk-email');
+    if(email.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      email.closest('.bk-field').classList.add('err');ok=false;
+    }
+    return ok;
+  }
+  form.querySelectorAll('input,textarea').forEach(el=>{
+    el.addEventListener('input',()=>el.closest('.bk-field').classList.remove('err'));
+  });
+
+  submitBtn.addEventListener('click',async ()=>{
+    errEl.style.display='none';
+    if(!validate()){
+      errEl.textContent='Fyll i namn, företag och en giltig e-postadress.';
+      errEl.style.display='block';
+      return;
+    }
+    submitBtn.disabled=true;
+    submitBtn.textContent='Skickar…';
+
+    const d=state.selDate;
+    const dateStr=`${SV_DAYS_LONG[d.getDay()]} ${d.getDate()} ${SV_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    const payload={
+      _subject:`Ny mötesbokning — ${document.getElementById('bk-name').value.trim()} / ${document.getElementById('bk-company').value.trim()}`,
+      _template:'table',
+      _captcha:'false',
+      Bokningstyp:'Möte via Zaptec-pitch',
+      Datum:dateStr,
+      Tid:state.selTime,
+      Namn:document.getElementById('bk-name').value.trim(),
+      Företag:document.getElementById('bk-company').value.trim(),
+      Email:document.getElementById('bk-email').value.trim(),
+      Telefon:document.getElementById('bk-phone').value.trim()||'—',
+      Meddelande:document.getElementById('bk-msg').value.trim()||'—',
+      Källa:'Zaptec-pitch (villasjovik.github.io/zaptec)'
+    };
+
+    let sent=false;
+    try{
+      const res=await fetch(`https://formsubmit.co/ajax/${RECIPIENT}`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      const data=await res.json().catch(()=>({}));
+      if(res.ok&&(data.success==='true'||data.success===true)){
+        sent=true;
+      }
+    }catch(err){/* nätverksfel — faller tillbaka till mailto */}
+
+    if(sent){
+      doneText.textContent='Vi återkommer inom 24h med en kalenderinbjudan och bekräftelse på tiden.';
+      goStage(4);
+    }else{
+      // Fallback: öppna mailto så användaren manuellt skickar (kräver ingen aktivering)
+      const body=
+`Ny mötesbokning
+
+Datum: ${dateStr}
+Tid: ${state.selTime}
+
+Namn: ${payload.Namn}
+Företag: ${payload.Företag}
+E-post: ${payload.Email}
+Telefon: ${payload.Telefon}
+
+Meddelande:
+${payload.Meddelande}
+
+— Skickat via Zaptec-pitch`;
+      const mailto=`mailto:${RECIPIENT}?subject=${encodeURIComponent(payload._subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href=mailto;
+      doneText.textContent='Bokningen öppnas i ditt mailprogram — tryck skicka där för att bekräfta tiden. Vi återkommer inom 24h.';
+      goStage(4);
+    }
+    submitBtn.disabled=false;
+    submitBtn.textContent='Skicka bokning →';
+  });
+
+  function resetFlow(){
+    state.selDate=null;state.selTime=null;
+    state.viewY=today.getFullYear();state.viewM=today.getMonth();
+    toTimeBtn.disabled=true;toFormBtn.disabled=true;
+    form.reset();
+    form.querySelectorAll('.bk-field').forEach(f=>f.classList.remove('err'));
+    slotsEl.querySelectorAll('.bk-slot').forEach(s=>s.classList.remove('selected'));
+    errEl.style.display='none';
+    goStage(1);
+  }
 })();
 </script>
 

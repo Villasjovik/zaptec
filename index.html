@@ -201,23 +201,27 @@ max-width:720px;margin-bottom:56px}
 .sp-c{padding:38px 28px;border:1px solid rgba(212,168,75,.22);border-radius:20px;background:rgba(212,168,75,.05);
   position:relative;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.3);
   --sp-rot:0deg;--sp-base-y:0px;--sp-float:0px;--sp-hover:0px;
-  transform-style:preserve-3d;transform-origin:50% 60%;
+  transform-style:preserve-3d;transform-origin:50% 55%;
   transform:rotateY(var(--sp-rot)) translate3d(0,calc(var(--sp-base-y) + var(--sp-float) + var(--sp-hover)),0)!important;
-  animation:sp-float-anim 7s ease-in-out infinite;
-  transition:border-color .3s,box-shadow .35s,opacity .8s var(--ease),--sp-hover .45s var(--ease)}
+  animation:sp-float-anim 11s cubic-bezier(.45,.05,.55,.95) infinite;
+  will-change:transform;
+  transition:border-color .3s,box-shadow .35s,opacity .8s var(--ease),--sp-hover .55s var(--ease)}
 .sp-c::before{content:'';position:absolute;inset:0;border-radius:20px;
   background:radial-gradient(circle at 50% 0%,rgba(212,168,75,.09),transparent 70%);opacity:0;transition:opacity .35s}
 .sp-c:hover::before{opacity:1}
 .sp-c:hover{border-color:rgba(212,168,75,.35);box-shadow:0 32px 70px rgba(0,0,0,.45);--sp-hover:-10px}
 
-/* Fan-layout: outer cards tilt inward, middle sits higher */
-.sp-grid>.sp-c:first-child{--sp-rot:7deg;--sp-base-y:14px;animation-delay:-1.5s}
-.sp-grid>.sp-c:nth-child(2):not(:last-child){--sp-rot:0deg;--sp-base-y:-18px;animation-delay:0s;z-index:2}
-.sp-grid>.sp-c:last-child:not(:first-child):not(:nth-child(2)){--sp-rot:-7deg;--sp-base-y:14px;animation-delay:-3.5s}
+/* Fan-layout: outer cards tilt sharply inward, middle sits higher */
+.sp-grid>.sp-c:first-child{--sp-rot:14deg;--sp-base-y:20px;animation-delay:-2.2s}
+.sp-grid>.sp-c:nth-child(2):not(:last-child){--sp-rot:0deg;--sp-base-y:-22px;animation-delay:0s;z-index:2}
+.sp-grid>.sp-c:last-child:not(:first-child):not(:nth-child(2)){--sp-rot:-14deg;--sp-base-y:20px;animation-delay:-5.5s}
 
 @keyframes sp-float-anim{
-  0%,100%{--sp-float:0px}
-  50%{--sp-float:-6px}
+  0%{--sp-float:0px}
+  25%{--sp-float:-4.5px}
+  50%{--sp-float:-9px}
+  75%{--sp-float:-4.5px}
+  100%{--sp-float:0px}
 }
 
 .sp-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:600}
@@ -310,20 +314,24 @@ padding:48px 40px 44px;position:relative;text-align:left;
 --pb-rot:0deg;--pb-base-y:0px;--pb-float:0px;--pb-hover:0px;
 transform-style:preserve-3d;transform-origin:50% 55%;
 transform:rotateY(var(--pb-rot)) translate3d(0,calc(var(--pb-base-y) + var(--pb-float) + var(--pb-hover)),0)!important;
-animation:pb-float-anim 8s ease-in-out infinite;
-transition:border-color .4s,box-shadow .4s,opacity .8s var(--ease),--pb-hover .45s var(--ease)}
+animation:pb-float-anim 12s cubic-bezier(.45,.05,.55,.95) infinite;
+will-change:transform;
+transition:border-color .4s,box-shadow .4s,opacity .8s var(--ease),--pb-hover .55s var(--ease)}
 .price-box:hover{border-color:rgba(212,168,75,.4);--pb-hover:-8px}
 .price-box.featured{border-color:rgba(212,168,75,.45);
 background:linear-gradient(145deg,rgba(212,168,75,.08),rgba(212,168,75,.02));
 box-shadow:0 8px 48px rgba(212,168,75,.1)}
 
-/* 2-card fan: both tilt inward toward center */
-.price-grid>.price-box:first-child{--pb-rot:6deg;animation-delay:-2s}
-.price-grid>.price-box:last-child{--pb-rot:-6deg;animation-delay:0s}
+/* 2-card fan: both tilt sharply inward toward center */
+.price-grid>.price-box:first-child{--pb-rot:11deg;animation-delay:-3s}
+.price-grid>.price-box:last-child{--pb-rot:-11deg;animation-delay:0s}
 
 @keyframes pb-float-anim{
-  0%,100%{--pb-float:0px}
-  50%{--pb-float:-5px}
+  0%{--pb-float:0px}
+  25%{--pb-float:-3.5px}
+  50%{--pb-float:-7px}
+  75%{--pb-float:-3.5px}
+  100%{--pb-float:0px}
 }
 
 .price-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.05;letter-spacing:-.005em}

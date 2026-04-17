@@ -430,7 +430,6 @@ position:relative;overflow:hidden;transition:color .35s}
   <div class="si on" data-t="sec-hero"><span class="si-lbl">Intro</span><div class="si-dot"></div></div>
   <div class="si" data-t="sec-spar"><span class="si-lbl">Tre spår</span><div class="si-dot"></div></div>
   <div class="si" data-t="sec-profil"><span class="si-lbl">Kanalen</span><div class="si-dot"></div></div>
-  <div class="si" data-t="sec-lev"><span class="si-lbl">Leveransen</span><div class="si-dot"></div></div>
   <div class="si" data-t="sec-pr"><span class="si-lbl">Investering</span><div class="si-dot"></div></div>
   <div class="si" data-t="sec-cta"><span class="si-lbl">Kontakt</span><div class="si-dot"></div></div>
 </nav>
@@ -565,43 +564,6 @@ position:relative;overflow:hidden;transition:color .35s}
 
 <div class="gd"></div>
 
-<!-- ══ LEVERANSEN ════════════════════════════════════ -->
-<section id="sec-lev">
-  <div class="lev-orb lev-orb-1" aria-hidden="true"></div>
-  <div class="leather-tex" aria-hidden="true"></div>
-  <div class="lev-inner">
-    <p class="sec-lbl rv">Vad som ingår</p>
-    <h2 class="sec-h2 rv">Välj det upplägg <em>som passar er.</em></h2>
-    <div class="lev-grid">
-
-      <!-- Engångspaket -->
-      <div class="lc rv d1">
-        <svg class="lc-icon" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-          <circle cx="8.5" cy="8.5" r="1.5"></circle>
-          <polyline points="21 15 16 10 5 21"></polyline>
-        </svg>
-        <h3>Engångspaket</h3>
-        <p>20 miljöbilder med Zaptec Go i Villa Sjöviks hemmiljö — laddboxen som en naturlig del av fasad, garage och vardag. Full nyttjanderätt för er hemsida, sociala kanaler och marknadsföring. Plus en publicering i @villasjoviks flöde för varumärkeskännedom.</p>
-        <span class="lc-tag">20 bilder &middot; Full nyttjanderätt</span>
-      </div>
-
-      <!-- Kampanjpaket -->
-      <div class="lc rv d2">
-        <svg class="lc-icon" viewBox="0 0 24 24">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-        <h3>Kampanjpaket</h3>
-        <p>1 video i @villasjovik-flödet byggd på ett av de tre spåren — Powers Adventure, Eco Mode eller Designintegration. Plus 2 bildpubliceringar och full nyttjanderätt till allt material.</p>
-        <span class="lc-tag">1 video + 2 bildpubliceringar</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="gd"></div>
-
 <!-- ══ PARALLAX TEXT ═════════════════════════════════ -->
 <section id="sec-px" aria-hidden="true">
   <div class="px-row go" id="pxr1">Powers adventure &middot; Teknik som smycke &middot; Powers adventure &middot; Teknik som smycke &middot; Powers adventure</div>
@@ -620,7 +582,7 @@ position:relative;overflow:hidden;transition:color .35s}
   <div class="leather-tex" aria-hidden="true"></div>
   <div class="pr-inner">
     <p class="sec-lbl rv">Investering</p>
-    <h2 class="sec-h2 rv">Ni levererar Zaptec Go. <em>Jag&nbsp;levererar&nbsp;resten.</em></h2>
+    <h2 class="sec-h2 rv">Välj det upplägg <em>som&nbsp;passar&nbsp;er.</em></h2>
 
     <div class="price-grid">
 
@@ -832,7 +794,7 @@ if(spotSec){
 }
 
 /* ── SIDENAV ── */
-const secs=['sec-hero','sec-spar','sec-profil','sec-lev','sec-pr','sec-cta'];
+const secs=['sec-hero','sec-spar','sec-profil','sec-pr','sec-cta'];
 const sis=document.querySelectorAll('.si');
 sis.forEach(si=>si.addEventListener('click',()=>{
   document.getElementById(si.dataset.t)?.scrollIntoView({behavior:'smooth'});

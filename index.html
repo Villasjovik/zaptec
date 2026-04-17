@@ -158,49 +158,36 @@ max-width:720px;margin-bottom:56px}
 
 /* ══ PARTNERS TICKER ════════════════════════════ */
 #sec-mq{
-  /* Varm beige/linne-gradient — ljust nog för loggor att synas,
-     men utan det platta "nästan vita" känslan */
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 50%,rgba(255,245,220,.45) 0%,transparent 70%),
-    linear-gradient(180deg,#e8dcc2 0%,#dcc9a5 50%,#d1bc8c 100%);
-  border-top:2px solid rgba(212,168,75,.5);
-  border-bottom:2px solid rgba(212,168,75,.5);
-  padding:48px 24px 56px;position:relative;isolation:isolate;
-  box-shadow:inset 0 0 120px rgba(130,90,30,.12)
+  /* Neutral ljus linne — varm men utan gulton */
+  background:linear-gradient(180deg,#efebe3 0%,#e5e0d5 100%);
+  border-top:2px solid rgba(212,168,75,.4);
+  border-bottom:2px solid rgba(212,168,75,.4);
+  padding:22px 0 26px;position:relative;isolation:isolate
 }
-.mq-head{text-align:center;padding-bottom:36px;position:relative;z-index:3}
-.mq-lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(60,40,15,.7);font-weight:600}
+.mq-head{text-align:center;padding-bottom:18px;position:relative;z-index:3}
+.mq-lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(40,30,15,.55);font-weight:600}
 
-/* ── Statisk 4-kolumns partner-grid ─────────────── */
-.mq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:0 auto;perspective:1200px}
-.mq-item{display:flex;align-items:center;justify-content:center;min-height:130px;perspective:1000px}
-.mq-logo{width:180px;height:92px;display:flex;align-items:center;justify-content:center;
-  transform-style:preserve-3d;position:relative}
-.mq-logo img{width:100%;height:100%;object-fit:contain;transform-style:preserve-3d;
-  filter:drop-shadow(0 3px 7px rgba(70,45,15,.15));
-  transition:filter .35s}
-
-/* Ljus-sheen bakom varje logo på hover */
-.mq-logo::before{content:'';position:absolute;inset:-12px;pointer-events:none;
-  background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(212,168,75,.22),transparent 70%);
-  opacity:0;transition:opacity .5s}
-.mq-item:hover .mq-logo::before{opacity:1}
-.mq-item:hover .mq-logo img{filter:drop-shadow(0 5px 12px rgba(212,168,75,.35))}
-
-/* Statisk tilt per logo + periodisk Y-spin enligt header-regler */
-.mq-i1 .mq-logo img{animation:mqSpin1 13s cubic-bezier(.55,0,.45,1) infinite}
-.mq-i2 .mq-logo img{animation:mqSpin2 16s cubic-bezier(.55,0,.45,1) infinite -5s}
-.mq-i3 .mq-logo img{animation:mqSpin3 18s cubic-bezier(.55,0,.45,1) infinite -11s}
-.mq-i4 .mq-logo img{animation:mqSpin4 15s cubic-bezier(.55,0,.45,1) infinite -3s}
-
-@keyframes mqSpin1{0%,78%{transform:rotateZ(-1.5deg) rotateY(0)}100%{transform:rotateZ(-1.5deg) rotateY(360deg)}}
-@keyframes mqSpin2{0%,82%{transform:rotateZ(1deg) rotateY(0)}100%{transform:rotateZ(1deg) rotateY(-360deg)}}
-@keyframes mqSpin3{0%,85%{transform:rotateZ(-.7deg) rotateY(0)}100%{transform:rotateZ(-.7deg) rotateY(360deg)}}
-@keyframes mqSpin4{0%,80%{transform:rotateZ(1.3deg) rotateY(0)}100%{transform:rotateZ(1.3deg) rotateY(-360deg)}}
+/* ── RTL karusell — statiska, platta 2D-loggor, inga spin/tilt ── */
+.mq-grid{position:relative;overflow:hidden;max-width:100%;margin:0 auto;
+  mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.mq-track{display:flex;align-items:center;gap:80px;width:max-content;
+  animation:mq-scroll 42s linear infinite;will-change:transform}
+.mq-track:hover{animation-play-state:paused}
+@keyframes mq-scroll{
+  from{transform:translateX(0)}
+  to  {transform:translateX(-50%)}
+}
+.mq-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;height:54px}
+.mq-logo{width:130px;height:54px;display:flex;align-items:center;justify-content:center}
+.mq-logo img{width:100%;height:100%;object-fit:contain;
+  mix-blend-mode:multiply;opacity:.85;
+  transition:opacity .3s}
+.mq-item:hover .mq-logo img{opacity:1}
 
 @media(max-width:860px){
-  .mq-grid{grid-template-columns:repeat(2,1fr)}
-  .mq-logo{width:140px;height:72px}
+  .mq-track{gap:56px}
+  .mq-logo{width:110px;height:46px}
 }
 
 /* ══ TRE SPÅR ═════════════════════════════════════ */
@@ -535,10 +522,25 @@ position:relative;overflow:hidden;transition:color .35s}
     <span class="mq-lbl">Tidigare samarbeten</span>
   </div>
   <div class="mq-grid">
-    <div class="mq-item mq-i1"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt="Lexington"></div></div>
-    <div class="mq-item mq-i2"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt="Mille Notti"></div></div>
-    <div class="mq-item mq-i3"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt="Segway"></div></div>
-    <div class="mq-item mq-i4"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt="Markslöjd"></div></div>
+    <div class="mq-track">
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt="Lexington"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt="Mille Notti"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt="Segway"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt="Markslöjd"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt="Nuura"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt="Vedum"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt="TineK Home"></div></div>
+      <div class="mq-item"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt="Husqvarna"></div></div>
+      <!-- duplikat för sömlös loop -->
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/lexington.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/mille_notti.avif" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/segway.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/markslojd.avif" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/nuura.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/vedum.png" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/tinekhome.jpg" alt=""></div></div>
+      <div class="mq-item" aria-hidden="true"><div class="mq-logo"><img src="https://villasjovik.github.io/velux/logos/husqvarna.jpg" alt=""></div></div>
+    </div>
   </div>
 </div>
 

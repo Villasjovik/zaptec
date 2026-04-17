@@ -252,6 +252,7 @@ background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:
 .sc.lit::after{transform:scaleX(1)}
 .sc:hover{background:rgba(212,168,75,.04)}
 .sc-bg{position:absolute;top:-8px;right:6px;font-family:'Playfair Display',serif;font-size:90px;font-weight:700;color:rgba(212,168,75,.04);line-height:1;user-select:none;pointer-events:none}
+.sc-bg-sym{font-size:140px;font-style:italic;top:-18px;right:10px;color:rgba(212,168,75,.05)}
 .sc-num{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,46px);font-weight:500;color:var(--gold);line-height:1;display:block}
 .sc-suf{font-size:.45em;color:var(--warm)}
 .sc-sub{font-size:10px;color:rgba(212,168,75,.5);margin-top:4px;letter-spacing:.06em}
@@ -532,19 +533,21 @@ position:relative;overflow:hidden;transition:color .35s}
     <h2 class="sec-h2 rv">Rätt hem. <em>Rätt&nbsp;laddning.</em></h2>
     <div class="stats-grid">
       <div class="sc rv d1">
-        <div class="sc-bg" aria-hidden="true">164</div>
-        <span class="sc-num"><span class="cu" data-v="164">0</span><span class="sc-suf">k</span></span>
-        <p class="sc-sub">+30k Facebook</p>
-        <p class="sc-lbl">Instagram följare</p>
+        <div class="sc-bg" aria-hidden="true">194</div>
+        <span class="sc-num"><span class="cu" data-v="194">0</span><span class="sc-suf">k</span></span>
+        <p class="sc-sub">164k Instagram &middot; 30k Facebook</p>
+        <p class="sc-lbl">Följare totalt</p>
       </div>
       <div class="sc rv d2">
+        <div class="sc-bg sc-bg-sym" aria-hidden="true">&amp;</div>
         <span class="sc-num" style="font-size:clamp(16px,2.2vw,26px);padding-top:8px">Hem &amp; trädgård</span>
         <p class="sc-lbl">Nisch &amp; målgrupp</p>
       </div>
       <div class="sc rv d3">
+        <div class="sc-bg sc-bg-sym" aria-hidden="true">@</div>
         <span class="sc-num" style="font-size:clamp(14px,1.8vw,22px);padding-top:8px">Visuell kreatör</span>
-        <p class="sc-sub" style="font-size:11px;margin-top:6px">Villa Sjövik — @villasjovik</p>
-        <p class="sc-lbl" style="visibility:hidden">—</p>
+        <p class="sc-sub" style="font-size:11px;margin-top:6px">Villa Sjövik &mdash; @villasjovik</p>
+        <p class="sc-lbl" style="visibility:hidden">&mdash;</p>
       </div>
     </div>
   </div>

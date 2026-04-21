@@ -55,9 +55,11 @@ function initLogo3D(container) {
   const H = container.clientHeight || 400;
   const isTransparent = bgColor === 'transparent';
 
-  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:isTransparent });
+  // Mobile perf — lower pixelRatio + disable antialias så det inte laggar på iPhone/Android
+  const IS_MOBILE = window.matchMedia('(max-width:768px)').matches || window.matchMedia('(pointer:coarse)').matches;
+  const renderer = new THREE.WebGLRenderer({ antialias:!IS_MOBILE, alpha:isTransparent, powerPreference:IS_MOBILE?'low-power':'high-performance' });
   renderer.setSize(W, H);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(IS_MOBILE ? 1 : Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.3;
   if (isTransparent) renderer.setClearColor(0x000000, 0);

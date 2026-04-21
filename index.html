@@ -652,6 +652,51 @@ position:relative;overflow:hidden;transition:color .35s}
   .ws .w i{transform:none!important}
   .body-loaded .rv{opacity:1!important;transform:none!important}
 }
+
+/* ═══ MOBILE OPTIMIZATION (desktop orörd) ═══ */
+@media(max-width:768px){
+  .snap-nav,.sp-c,.price-box,.lc,.gc,.bk-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .lc::after,.gc::after,.sp-c::after{display:none!important}
+  .lc,.gc,.sp-c{--mx:50%;--my:50%}
+  .mq-track,.sp-c{will-change:auto}
+}
+
+@media(max-width:640px){
+  .h-lockup{flex-direction:column;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+  .h-side,.h-side-l,.h-side-r{flex:none;width:100%;justify-content:center!important;padding:0!important}
+  .h-lockup::after{display:none}
+  .h-side-l,.h-side-r{transform:none!important;transition:opacity .8s ease!important;opacity:0}
+  body.slide-in .h-side-l,body.slide-in .h-side-r{opacity:1}
+  .h-lockup{transform:scale(1)!important}
+  .logo-3d{width:60vw!important;height:28vw!important;max-width:280px!important;max-height:140px!important}
+  #sec-hero{min-height:auto;padding:64px 20px 40px}
+  .h-x{font-size:clamp(42px,12vw,68px)!important}
+  .h-tagline{font-size:clamp(18px,4.5vw,24px)!important}
+  .sp-grid{grid-template-columns:1fr!important;perspective:none!important;gap:14px}
+  .sp-c{padding:26px 20px!important;transform:none!important}
+  .sp-c h3{font-size:20px!important}
+  .price-grid{grid-template-columns:1fr!important;perspective:none!important;gap:14px}
+  .price-box{padding:28px 22px!important;transform:none!important}
+  .mq-track{animation-duration:28s!important}
+  .mq-track img{max-height:36px!important}
+  section{padding:56px 18px!important}
+}
+
+@media(max-width:480px){
+  .h-x{font-size:clamp(36px,13vw,54px)!important}
+  .h-tagline{font-size:16px!important}
+  .logo-3d{max-width:240px!important;max-height:120px!important}
+  section{padding:44px 14px!important}
+  .bk-card{padding:22px 18px!important}
+  .bk-slots{grid-template-columns:repeat(2,1fr)!important}
+}
+
+@media(pointer:coarse){
+  #cur,#cur-r{display:none!important}
+  body{cursor:auto!important}
+  *{cursor:auto!important}
+  .sp-c:hover,.price-box:hover,.lc:hover,.gc:hover{transform:none!important}
+}
 </style>
 </head>
 <body>
